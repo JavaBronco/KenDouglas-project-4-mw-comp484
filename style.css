@@ -1,0 +1,381 @@
+/* ================================================================
+   Planeswalker's Typing Trial — MTG-Themed Stylesheet
+   ================================================================ */
+
+/* Custom Properties
+---------------------------------------------------------------- */
+:root {
+    --void:           #0a0a14;
+    --card-bg:        #1a1000;
+    --parchment:      #f0e0b0;
+    --parchment-mid:  #c8a870;
+    --gold:           #c9a84c;
+    --gold-bright:    #f0d060;
+    --gold-dark:      #7a5c10;
+
+    --text-parchment: #e8d5a3;
+    --text-dark:      #1a0d00;
+
+    --mana-blue:  #1464aa;
+    --mana-red:   #cc2200;
+    --mana-green: #1a7a1a;
+    --mana-gray:  #555555;
+
+    --border-width: 8px;
+}
+
+/* Typography
+---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body, button, input, select, textarea {
+    font-family: 'Source Sans Pro', 'Helvetica', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    clear: both;
+}
+
+p { margin-bottom: 1.5em; }
+b, strong { font-weight: bold; }
+
+/* Base
+---------------------------------------------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--void);
+    background-image: radial-gradient(ellipse at 50% 0%, #1a1a3a 0%, #0a0a14 65%);
+    min-height: 100vh;
+    color: var(--text-parchment);
+}
+
+/* Masthead
+---------------------------------------------------------------- */
+.masthead {
+    padding: 1.5em 2em;
+    background: linear-gradient(180deg, #0d0d1a 0%, #130c00 100%);
+    border-bottom: 3px solid var(--gold-dark);
+    text-align: center;
+}
+
+.masthead h1 {
+    font-size: 2.2em;
+    font-weight: 900;
+    color: var(--gold-bright);
+    text-shadow: 0 0 24px rgba(200, 160, 60, 0.5), 0 2px 4px rgba(0, 0, 0, 0.9);
+    margin: 0.15em 0 0.1em;
+    letter-spacing: 0.05em;
+}
+
+.subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75em;
+    color: var(--parchment-mid);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Mana Symbol Row
+---------------------------------------------------------------- */
+.mana-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.mana {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7em;
+    font-weight: 700;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    cursor: default;
+    user-select: none;
+}
+
+.mana-w { background: #f5f0d8; color: #3a3020; border-color: #d4c890; }
+.mana-u { background: #1464aa; color: #c8e0f8; border-color: #6ab0e8; }
+.mana-b { background: #1a1a2a; color: #c8b8d8; border-color: #4a3060; }
+.mana-r { background: #bb3300; color: #ffd0a0; border-color: #ff6030; }
+.mana-g { background: #1a6820; color: #b0f0b0; border-color: #40c050; }
+
+/* Intro
+---------------------------------------------------------------- */
+.intro {
+    padding: 1.5em 2em;
+    background: linear-gradient(180deg, #130c00 0%, #0c0800 100%);
+    border-bottom: 1px solid var(--gold-dark);
+}
+
+.intro p {
+    margin: 0 auto;
+    max-width: 600px;
+    color: var(--parchment-mid);
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+/* Test Area
+---------------------------------------------------------------- */
+.test-area {
+    max-width: 600px;
+    margin: 0 auto 2em;
+    padding: 1em 2em 2em;
+}
+
+/* Origin Text — styled like an MTG card text box
+---------------------------------------------------------------- */
+#origin-text {
+    margin: 1.5em 0 1em;
+    padding: 0 1.5em 1.2em;
+    background: var(--parchment);
+    border: 3px solid var(--gold-dark);
+    border-radius: 6px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(200, 168, 76, 0.2);
+}
+
+#origin-text::before {
+    content: '✦  Arcane Passage  ✦';
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.58em;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    text-align: center;
+    padding: 0.7em 0 0.5em;
+    border-bottom: 1px solid var(--parchment-mid);
+    margin-bottom: 0.9em;
+}
+
+#origin-text p {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: 1em;
+    line-height: 1.65;
+}
+
+/* Test Wrapper — the typing area with dynamic border
+---------------------------------------------------------------- */
+.test-wrapper {
+    display: flex;
+    border: var(--border-width) solid var(--mana-gray);
+    border-radius: 8px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.test-wrapper.complete {
+    animation: completePulse 1.2s ease-in-out 2;
+}
+
+@keyframes completePulse {
+    0%,  100% { box-shadow: 0 0 10px rgba(26, 122, 26, 0.35); }
+    50%        { box-shadow: 0 0 32px rgba(26, 122, 26, 0.85); }
+}
+
+.test-wrapper textarea {
+    flex: 1;
+    background: #0f0f1f;
+    color: var(--text-parchment);
+    border: none;
+    border-radius: 4px;
+    padding: 1em;
+    font-size: 1em;
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+}
+
+.test-wrapper textarea::placeholder {
+    color: #44445a;
+    font-style: italic;
+}
+
+/* Meta Row — timer, metrics, reset
+---------------------------------------------------------------- */
+.meta {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+/* Timer
+---------------------------------------------------------------- */
+#clock { text-align: left; }
+
+.timer-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58em;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 0.1em;
+}
+
+.timer {
+    font-family: 'Cinzel', serif;
+    font-size: 2.4em;
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 12px rgba(200, 168, 76, 0.4);
+    letter-spacing: 0.04em;
+    line-height: 1;
+}
+
+/* Live Metrics (WPM / Errors)
+---------------------------------------------------------------- */
+#metrics {
+    display: flex;
+    gap: 0.75em;
+}
+
+.metric-card {
+    text-align: center;
+    background: var(--card-bg);
+    border: 2px solid var(--gold-dark);
+    border-radius: 6px;
+    padding: 0.45em 1.2em;
+    min-width: 76px;
+}
+
+.metric-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+}
+
+.metric-value {
+    font-family: 'Cinzel', serif;
+    font-size: 1.75em;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.1;
+}
+
+/* Reset Button
+---------------------------------------------------------------- */
+#reset {
+    font-family: 'Cinzel', serif;
+    padding: 0.6em 1.4em;
+    font-size: 0.95em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--card-bg);
+    border: 3px solid var(--gold-dark);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease,
+                border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+#reset:hover {
+    color: var(--void);
+    background: var(--gold);
+    border-color: var(--gold-bright);
+    box-shadow: 0 0 14px rgba(200, 168, 76, 0.55);
+}
+
+/* Hall of Champions — leaderboard
+---------------------------------------------------------------- */
+#scores-section {
+    max-width: 600px;
+    margin: 0 auto 4em;
+    padding: 0 2em;
+}
+
+#scores-section h2 {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid var(--gold-dark);
+}
+
+.no-scores {
+    text-align: center;
+    color: #44445a;
+    font-style: italic;
+    margin: 0;
+}
+
+#leaderboard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65em;
+}
+
+.score-card {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    background: var(--card-bg);
+    border: 2px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 0.7em 1.2em;
+    transition: border-color 0.2s ease;
+}
+
+.score-card:hover { border-color: var(--gold); }
+
+.score-card:nth-child(1) { border-color: #c9a84c; }
+.score-card:nth-child(2) { border-color: #a0a0b0; }
+.score-card:nth-child(3) { border-color: #a06030; }
+
+.score-rank {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6em;
+    font-weight: 900;
+    min-width: 36px;
+    text-align: center;
+    line-height: 1;
+}
+
+.score-card:nth-child(1) .score-rank { color: #ffd700; }
+.score-card:nth-child(2) .score-rank { color: #c8c8d8; }
+.score-card:nth-child(3) .score-rank { color: #cd8040; }
+
+.score-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78em;
+    color: var(--parchment-mid);
+    flex: 1;
+    letter-spacing: 0.04em;
+}
+
+.score-time {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15em;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.score-wpm {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85em;
+    color: var(--parchment-mid);
+    min-width: 80px;
+    text-align: right;
+}

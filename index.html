@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Planeswalker's Typing Trial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="masthead">
+        <div class="mana-row">
+            <span class="mana mana-w" title="White Mana">W</span>
+            <span class="mana mana-u" title="Blue Mana">U</span>
+            <span class="mana mana-b" title="Black Mana">B</span>
+            <span class="mana mana-r" title="Red Mana">R</span>
+            <span class="mana mana-g" title="Green Mana">G</span>
+        </div>
+        <h1>Planeswalker's Typing Trial</h1>
+        <p class="subtitle">Prove your mastery of the written word</p>
+    </header>
+
+    <main class="main">
+        <article class="intro">
+            <p>The fate of the Multiverse rests upon your spellcraft. Duplicate the passage below, EXACTLY, to prove your arcane precision. Your timer awakens with your first keystroke and halts only when you have transcribed the text without error. May your mana flow true.</p>
+        </article>
+
+        <section class="test-area">
+            <div id="origin-text">
+                <p>Loading passage...</p>
+            </div>
+
+            <div class="test-wrapper">
+                <textarea id="test-area" name="textarea" rows="6" placeholder="The clock starts when you begin typing..."></textarea>
+            </div>
+
+            <div class="meta">
+                <section id="clock">
+                    <div class="timer-label">Elapsed Time</div>
+                    <div class="timer">00:00:00</div>
+                </section>
+
+                <div id="metrics">
+                    <div class="metric-card">
+                        <div class="metric-label">WPM</div>
+                        <div class="metric-value" id="wpm-display">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Errors</div>
+                        <div class="metric-value" id="error-display">0</div>
+                    </div>
+                </div>
+
+                <button id="reset">Cast Again</button>
+            </div>
+        </section>
+
+        <section id="scores-section">
+            <h2>Hall of Champions</h2>
+            <div id="leaderboard">
+                <p class="no-scores">No records yet. Be the first champion!</p>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
